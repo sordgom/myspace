@@ -16,6 +16,7 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
 });
 
 k.loadSprite("map", "./map.png");
+k.loadSound("music", "/bg-music.mp3")
 
 k.setBackground(k.Color.fromHex("#000000"));
 
@@ -202,6 +203,21 @@ k.scene("main", async () => {
       player.direction = "down";
       player.move(0, player.speed);
     }
+  });
+
+  let isPlaying = false;
+  let music;
+  k.onKeyPress("m", () => {
+    isPlaying = !isPlaying;
+    if (isPlaying) {
+      music = k.play("music", {
+        loop: true,
+        volume: 0.2,
+      });
+    } else {
+      music.stop();
+    }
+    console.log(isPlaying, music.paused)
   });
 });
 
